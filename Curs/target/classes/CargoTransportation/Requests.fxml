@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CargoTransportation.RequestsController">
+    <children>
+        <BorderPane prefHeight="400.0" prefWidth="700.0">
+            <center>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="90.0" prefWidth="700.0" style="-fx-background-color: #98FB98;">
+                            <children>
+                                <Label layoutX="278.0" layoutY="20.0" text="Requests" textFill="#a49595">
+                                    <font>
+                                        <Font name="System Bold Italic" size="35.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <Button fx:id="req1" layoutX="31.0" layoutY="235.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="70.0" text="Go">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="exit" layoutX="14.0" layoutY="325.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="127.0" text="Exit">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="req2" layoutX="218.0" layoutY="235.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="69.0" text="Go">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Label layoutX="545.0" layoutY="163.0" prefHeight="23.0" prefWidth="129.0" text="Find car by driver name" />
+                        <Label alignment="TOP_LEFT" layoutX="381.0" layoutY="163.0" prefHeight="37.0" prefWidth="106.0" text="Show all routes &#10;with 1 start point" />
+                        <Button fx:id="req4" layoutX="574.0" layoutY="238.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="71.0" text="Go">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="req3" layoutX="398.0" layoutY="237.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="72.0" text="Go">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Label alignment="TOP_LEFT" layoutX="188.0" layoutY="163.0" prefHeight="38.0" prefWidth="129.0" text="Show all orders served&#10; by manager" />
+                  <Text layoutX="15.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Show all orders made &#10;by customer" wrappingWidth="125.982421875" />
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>
