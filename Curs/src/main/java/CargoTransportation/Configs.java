@@ -4,24 +4,9 @@ import java.sql.*;
 
 public class Configs {
 
-    Connection conn = null;
-
-    public static Connection ConnectDB() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/CargoTransportation?useUnicode=true&serverTimezone=UTC", "root", "root");
-            System.out.println("Connection success!");
-            return conn;
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-
     public void AddCargo(String type, String cost, String volume, String weight) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Cargo` (`type`, `cost`, `volume`, `weight`) VALUES (?,?,?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, type);
         prSt.setString(2, cost);
         prSt.setString(3, volume);
@@ -32,7 +17,7 @@ public class Configs {
 
     public void AddClients(String fullName, String phoneNumber, String address) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Clients` (`full_name`, `phone_number`, `address`) VALUES (?,?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, fullName);
         prSt.setString(2, phoneNumber);
         prSt.setString(3, address);
@@ -41,7 +26,7 @@ public class Configs {
 
     public void AddManager(String fullName, String phoneNumber) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Managers` (`full_name`, `phone_number`) VALUES (?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, fullName);
         prSt.setString(2, phoneNumber);
         prSt.executeUpdate();
@@ -50,7 +35,7 @@ public class Configs {
 
     public void AddRoute(String startPoint, String endPoint, String distance) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Routes` (`start_point`, `end_point`, `distance`) VALUES (?,?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, startPoint);
         prSt.setString(2, endPoint);
         prSt.setString(3, distance);
@@ -60,7 +45,7 @@ public class Configs {
 
     public void AddVehicle(String licensePlate, String model, String fuelConsumption, String carrying, String wagonVolume) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Vehicles` (`license_plate`, `model`, `fuel_consumption`, `carrying`, `wagon_volume`) VALUES (?,?,?,?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, licensePlate);
         prSt.setString(2, model);
         prSt.setString(3, fuelConsumption);
@@ -72,7 +57,7 @@ public class Configs {
 
     public void AddDriver(String fullName, String license, String phoneNumber, String vehicleId) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Drivers` (`full_name`, `license`, `phone_number`, `vehicle_id`) VALUES (?,?,?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, fullName);
         prSt.setString(2, license);
         prSt.setString(3, phoneNumber);
@@ -83,7 +68,7 @@ public class Configs {
 
     public void AddOrder(String managerId, String clientId, String routeId, String driverId, String cargoId, String orderDate, String deliveryDate) throws SQLException {
         String insert = "INSERT INTO `CargoTransportation`.`Orders` (`manager_id`, `client_id`, `route_id`, `driver_id`, `cargo_id`, `order_date`, `delivery_date`) VALUES (?,?,?,?,?,?,?)";
-        PreparedStatement prSt = ConnectDB().prepareStatement(insert);
+        PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, managerId);
         prSt.setString(2, clientId);
         prSt.setString(3, routeId);
@@ -98,7 +83,7 @@ public class Configs {
 
     public static void Del(String table, String id) throws SQLException {
         PreparedStatement del = null;
-        del = ConnectDB().prepareStatement("DELETE FROM " + table + " WHERE (id) = ?");
+        del = ConnectionToDB.getConnection().prepareStatement("DELETE FROM " + table + " WHERE (id) = ?");
         del.setString(1, id);
         del.execute();
     }

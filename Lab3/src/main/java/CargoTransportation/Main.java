@@ -97,7 +97,7 @@ public class Main {
                                 + "license varchar(11),"
                                 + "phone_number varchar(15),"
                                 + "vehicle_id integer,"
-                                + "FOREIGN KEY (vehicle_id) REFERENCES Vehicles (id),"
+                                + "FOREIGN KEY (vehicle_id) REFERENCES Vehicles (id) ON DELETE CASCADE,"
                                 + "PRIMARY KEY (id));");
                         prepSt.executeUpdate();
 
@@ -139,11 +139,11 @@ public class Main {
                                 + "route_id integer,"
                                 + "driver_id integer,"
                                 + "cargo_id integer,"
-                                + "FOREIGN KEY (manager_id) REFERENCES Managers (id),"
-                                + "FOREIGN KEY (client_id) REFERENCES Clients (id),"
-                                + "FOREIGN KEY (route_id) REFERENCES Routes (id),"
-                                + "FOREIGN KEY (driver_id) REFERENCES Drivers (id),"
-                                + "FOREIGN KEY (cargo_id) REFERENCES Cargo (id),"
+                                + "FOREIGN KEY (manager_id) REFERENCES Managers (id) ON DELETE CASCADE,"
+                                + "FOREIGN KEY (client_id) REFERENCES Clients (id) ON DELETE CASCADE,"
+                                + "FOREIGN KEY (route_id) REFERENCES Routes (id) ON DELETE CASCADE,"
+                                + "FOREIGN KEY (driver_id) REFERENCES Drivers (id) ON DELETE CASCADE,"
+                                + "FOREIGN KEY (cargo_id) REFERENCES Cargo (id) ON DELETE CASCADE,"
                                 + "order_date varchar (10),"
                                 + "delivery_date varchar (10),"
                                 + "PRIMARY KEY (id));");
@@ -151,6 +151,7 @@ public class Main {
 
                         System.out.println("Done ...");
 
+                        try { connection.close(); } catch(SQLException se) { /*can't do anything */ }
 
                     } catch (SQLException ex) {
                         System.out.println("- ? -" + ex);

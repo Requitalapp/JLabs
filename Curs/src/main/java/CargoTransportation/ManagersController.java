@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 
 
 public class ManagersController implements Initializable {
-    Connection conn = null;
     ResultSet rs = null;
     Statement st = null;
 
@@ -54,12 +53,11 @@ public class ManagersController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        conn = Configs.ConnectDB();
         final ObservableList data = FXCollections.observableArrayList();
         String query = "SELECT * FROM cargotransportation.managers";
         Statement st = null;
         try {
-            st = conn.createStatement();
+            st = ConnectionToDB.getConnection().createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }

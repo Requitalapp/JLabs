@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 
 public class CargoController implements Initializable {
-    Connection conn = null;
+    //Connection conn = null;
     ResultSet rs = null;
     Statement st = null;
 
@@ -60,12 +60,11 @@ public class CargoController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        conn = Configs.ConnectDB();
         final ObservableList data = FXCollections.observableArrayList();
         String query = "SELECT * FROM cargotransportation.cargo";
         Statement st = null;
         try {
-            st = conn.createStatement();
+            st = ConnectionToDB.getConnection().createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }

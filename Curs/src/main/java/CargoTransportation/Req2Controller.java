@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import static CargoTransportation.AddCargoController.isNumeric;
-import static CargoTransportation.Configs.ConnectDB;
 
 public class Req2Controller implements Initializable {
     Connection conn = null;
@@ -62,7 +61,6 @@ public class Req2Controller implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        Configs dbHandler = new Configs();
         find.setOnAction(even -> {
             String manager_ = manager.getText().trim();
             if (!manager_.equals("")) {
@@ -76,7 +74,7 @@ public class Req2Controller implements Initializable {
                         "and o.client_id = cl.id and m.id = o.manager_id";
                 Statement st = null;
                 try {
-                    st = ConnectDB().createStatement();
+                    st = ConnectionToDB.getConnection().createStatement();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

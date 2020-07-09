@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import static CargoTransportation.AddCargoController.isNumeric;
-import static CargoTransportation.Configs.ConnectDB;
 
 public class Req3Controller implements Initializable {
     Connection conn = null;
@@ -53,7 +52,6 @@ public class Req3Controller implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        Configs dbHandler = new Configs();
         find.setOnAction(even -> {
             String start_point_ = start_point_t.getText().trim();
             if (!start_point_.equals("")) {
@@ -63,7 +61,7 @@ public class Req3Controller implements Initializable {
                 String query = "SELECT id, start_point, end_point, distance FROM   cargotransportation.routes WHERE start_point = '" + start_point_ + "'";
                 Statement st = null;
                 try {
-                    st = ConnectDB().createStatement();
+                    st = ConnectionToDB.getConnection().createStatement();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

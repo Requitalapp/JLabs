@@ -47,10 +47,6 @@ public class DeleteCargoController {
             stage.close();
         });
 
-        exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
-            stage.close();
-        });
     }
 
     public static boolean isNumeric(String str) {

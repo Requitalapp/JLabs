@@ -14,10 +14,13 @@ public class Main extends Application {
         primaryStage.setTitle("Cargo Transportation");
         primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
+
     }
 
 
     public static void main(String[] args) {
+        ConnectionToDB.ConnectToDB();
         launch(args);
+        ConnectionToDB.closeConnection();
     }
 }
