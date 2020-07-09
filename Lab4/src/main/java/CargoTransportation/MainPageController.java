@@ -33,9 +33,6 @@ public class MainPageController {
     private Button routes;
 
     @FXML
-    private Button requests;
-
-    @FXML
     private Button exit;
 
     @FXML
@@ -66,10 +63,6 @@ public class MainPageController {
 
         cargo.setOnAction(event -> {
             show_display("/CargoTransportation/Cargo.fxml");
-        });
-
-        requests.setOnAction(event -> {
-            show_display("/CargoTransportation/Requests.fxml");
         });
 
         exit.setOnAction(event -> {
