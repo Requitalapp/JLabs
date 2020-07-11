@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CargoTransportation.Routes.AddRouteController">
+    <children>
+        <BorderPane prefHeight="400.0" prefWidth="700.0">
+            <right>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane prefHeight="90.0" prefWidth="700.0" style="-fx-background-color: #98FB98;">
+                            <children>
+                                <Label layoutX="265.0" layoutY="20.0" text="Add Route" textFill="#a49595">
+                                    <font>
+                                        <Font name="System Bold Italic" size="35.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <Button fx:id="add" layoutX="542.0" layoutY="328.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="144.0" text="Add">
+                            <font>
+                                <Font size="25.0" />
+                            </font>
+                        </Button>
+                        <TextField fx:id="start_point" layoutX="253.0" layoutY="160.0" prefHeight="25.0" prefWidth="194.0" promptText="Start point" />
+                        <TextField fx:id="end_point" layoutX="253.0" layoutY="209.0" prefHeight="25.0" prefWidth="194.0" promptText="End point" />
+                        <TextField fx:id="distance" layoutX="253.0" layoutY="258.0" prefHeight="25.0" prefWidth="194.0" promptText="Distance" />
+                        <TextArea fx:id="message" layoutX="463.0" layoutY="160.0" prefHeight="123.0" prefWidth="223.0" />
+                          <Button fx:id="exit" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="88.0" text="Exit">
+                              <font>
+                                  <Font size="30.0" />
+                              </font>
+                          </Button>
+                    </children>
+                </AnchorPane>
+            </right>
+        </BorderPane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>

@@ -41,31 +41,31 @@ public class MainPageController {
     @FXML
     void initialize(){
         clients.setOnAction(event -> {
-            show_display("/CargoTransportation/Clients.fxml");
+            show_display("/CargoTransportation/Clients/Clients.fxml");
         });
 
         managers.setOnAction(event -> {
-            show_display("/CargoTransportation/Managers.fxml");
+            show_display("/CargoTransportation/Managers/Managers.fxml");
         });
 
         orders.setOnAction(event -> {
-            show_display("/CargoTransportation/Orders.fxml");
+            show_display("/CargoTransportation/Orders/Orders.fxml");
         });
 
         drivers.setOnAction(event -> {
-            show_display("/CargoTransportation/Drivers.fxml");
+            show_display("/CargoTransportation/Drivers/Drivers.fxml");
         });
 
         vehicles.setOnAction(event -> {
-            show_display("/CargoTransportation/Vehicles.fxml");
+            show_display("/CargoTransportation/Vehicles/Vehicles.fxml");
         });
 
         routes.setOnAction(event -> {
-            show_display("/CargoTransportation/Routes.fxml");
+            show_display("/CargoTransportation/Routes/Routes.fxml");
         });
 
         cargo.setOnAction(event -> {
-            show_display("/CargoTransportation/Cargo.fxml");
+            show_display("/CargoTransportation/Cargo/Cargo.fxml");
         });
 
         requests.setOnAction(event -> {

@@ -1,5 +1,6 @@
 package CargoTransportation;
 
+import CargoTransportation.Vehicles.Vehicles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
-import static CargoTransportation.AddCargoController.isNumeric;
 
 public class Req4Controller implements Initializable {
     Connection conn = null;

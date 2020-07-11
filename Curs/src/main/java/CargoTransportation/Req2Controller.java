@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import static CargoTransportation.AddCargoController.isNumeric;
-
 public class Req2Controller implements Initializable {
     Connection conn = null;
     ResultSet rs = null;

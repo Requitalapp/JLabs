@@ -15,7 +15,7 @@ public class ConnectionToDB {
             System.out.println("Connection established!");
             return connection;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
     }
@@ -23,9 +23,9 @@ public class ConnectionToDB {
     public static void closeConnection(){
         try {
             connection.close();
+            System.out.println("Connection closed!");
         }catch(SQLException e){
             e.printStackTrace();
-            System.out.println("Connection closed!");
         }
     }
 
