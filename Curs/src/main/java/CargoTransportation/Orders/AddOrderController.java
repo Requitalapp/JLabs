@@ -1,6 +1,6 @@
 package CargoTransportation.Orders;
 
-import CargoTransportation.Configs;
+import CargoTransportation.Actions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -43,7 +43,7 @@ public class AddOrderController {
 
     @FXML
     void initialize() {
-        Configs dbHandler = new Configs();
+        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String manager_id_ = manager_id.getText().trim();
             String client_id_ = client_id.getText().trim();

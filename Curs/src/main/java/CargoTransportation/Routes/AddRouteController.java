@@ -1,6 +1,6 @@
 package CargoTransportation.Routes;
 
-import CargoTransportation.Configs;
+import CargoTransportation.Actions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -32,7 +32,7 @@ public class AddRouteController {
 
     @FXML
     void initialize() {
-        Configs dbHandler = new Configs();
+        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String start_point_ = start_point.getText().trim();
             String end_point_ = end_point.getText().trim();

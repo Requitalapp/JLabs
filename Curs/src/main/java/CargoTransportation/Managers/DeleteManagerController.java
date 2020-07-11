@@ -1,6 +1,6 @@
 package CargoTransportation.Managers;
 
-import CargoTransportation.Configs;
+import CargoTransportation.Actions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -25,7 +25,7 @@ public class DeleteManagerController {
 
     @FXML
     void initialize(){
-        Configs dbHandler = new Configs();
+        Actions dbHandler = new Actions();
         delete.setOnAction(even -> {
             String id_ = id.getText().trim();
             if (!id_.equals("")) {

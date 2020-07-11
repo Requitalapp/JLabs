@@ -69,7 +69,7 @@ public class MainPageController {
         });
 
         requests.setOnAction(event -> {
-            show_display("/CargoTransportation/Requests.fxml");
+            show_display("/CargoTransportation/Requests/Requests.fxml");
         });
 
         exit.setOnAction(event -> {

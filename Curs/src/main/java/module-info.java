@@ -12,5 +12,6 @@ module Curs {
     opens CargoTransportation.Orders;
     opens CargoTransportation.Routes;
     opens CargoTransportation.Vehicles;
+    opens CargoTransportation.Requests;
 
 }

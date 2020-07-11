@@ -1,6 +1,6 @@
 package CargoTransportation.Cargo;
 
-import CargoTransportation.Configs;
+import CargoTransportation.Actions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -34,7 +34,7 @@ public class AddCargoController {
 
     @FXML
     void initialize() {
-        Configs dbHandler = new Configs();
+        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String type_ = type.getText().trim();
             String cost_ = cost.getText().trim();

@@ -1,6 +1,6 @@
 package CargoTransportation.Vehicles;
 
-import CargoTransportation.Configs;
+import CargoTransportation.Actions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -37,7 +37,7 @@ public class AddVehicleController {
 
     @FXML
     void initialize() {
-        Configs dbHandler = new Configs();
+        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String license_plate_ = license_plate.getText().trim();
             String model_ = model.getText().trim();

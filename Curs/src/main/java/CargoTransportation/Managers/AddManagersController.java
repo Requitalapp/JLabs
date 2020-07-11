@@ -1,6 +1,6 @@
 package CargoTransportation.Managers;
 
-import CargoTransportation.Configs;
+import CargoTransportation.Actions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -28,7 +28,7 @@ public class AddManagersController {
 
     @FXML
     void initialize() {
-        Configs dbHandler = new Configs();
+        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String full_name_ = full_name.getText().trim();
             String phone_number_ = phone_number.getText().trim();
