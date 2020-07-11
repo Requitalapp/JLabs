@@ -2,6 +2,7 @@ package CargoTransportation.Managers;
 
 import CargoTransportation.Clients.Clients;
 import CargoTransportation.ConnectionToDB;
+import CargoTransportation.Const;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class ManagersController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         final ObservableList data = FXCollections.observableArrayList();
-        String query = "SELECT * FROM cargotransportation.managers";
+        String query = "SELECT * FROM " + Const.MANAGERS_TABLE;
         Statement st = null;
         try {
             st = ConnectionToDB.getConnection().createStatement();
@@ -71,9 +72,9 @@ public class ManagersController implements Initializable {
         Managers managers;
         try {
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String full_name = rs.getString("full_name");
-                String phone_number = rs.getString("phone_number");
+                int id = rs.getInt(Const.MANAGERS_ID);
+                String full_name = rs.getString(Const.MANAGERS_FULL_NAME);
+                String phone_number = rs.getString(Const.MANAGERS_PHONE_NUMBER);
                 managers = new Managers(id, full_name, phone_number);
                 data.add(managers);
             }

@@ -1,6 +1,7 @@
 package CargoTransportation.Cargo;
 
 import CargoTransportation.ConnectionToDB;
+import CargoTransportation.Const;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,7 +61,7 @@ public class CargoController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         final ObservableList data = FXCollections.observableArrayList();
-        String query = "SELECT * FROM cargotransportation.cargo";
+        String query = "SELECT * FROM " + Const.CARGO_TABLE;
         Statement st = null;
         try {
             st = ConnectionToDB.getConnection().createStatement();
@@ -76,11 +77,11 @@ public class CargoController implements Initializable {
         Cargo cargo;
         try {
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String type = rs.getString("type");
-                Float cost = rs.getFloat("cost");
-                Float volume = rs.getFloat("volume");
-                Float weight = rs.getFloat("weight");
+                int id = rs.getInt(Const.CARGO_ID);
+                String type = rs.getString(Const.CARGO_TYPE);
+                Float cost = rs.getFloat(Const.CARGO_COST);
+                Float volume = rs.getFloat(Const.CARGO_VOLUME);
+                Float weight = rs.getFloat(Const.CARGO_WEIGHT);
                 cargo = new Cargo(id, type, cost, volume, weight);
                 data.add(cargo);
             }

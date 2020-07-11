@@ -1,6 +1,7 @@
 package CargoTransportation.Vehicles;
 
 import CargoTransportation.Actions;
+import CargoTransportation.Const;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -31,7 +32,7 @@ public class DeleteVehicleController {
             if (!id_.equals("")) {
                 if (isNumeric(id_)==true) {
                     try{
-                    dbHandler.Del("cargotransportation.vehicles",id.getText());
+                    dbHandler.Del(Const.VEHICLES_TABLE,id.getText());
                     message.setText("Vehicle removed!");
                     }catch(SQLException e){
                         message.setText("Something went wrong!");

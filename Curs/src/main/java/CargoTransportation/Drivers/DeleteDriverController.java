@@ -1,6 +1,7 @@
 package CargoTransportation.Drivers;
 
 import CargoTransportation.Actions;
+import CargoTransportation.Const;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -31,7 +32,7 @@ public class DeleteDriverController {
             if (!id_.equals("")) {
                 if (isNumeric(id_)==true) {
                     try{
-                    dbHandler.Del("cargotransportation.drivers",id.getText());
+                    dbHandler.Del(Const.DRIVERS_TABLE,id.getText());
                     message.setText("Driver removed!");
                     }catch(SQLException e){
                         message.setText("Something went wrong!");

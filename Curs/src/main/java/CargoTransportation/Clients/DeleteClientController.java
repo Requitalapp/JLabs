@@ -1,6 +1,7 @@
 package CargoTransportation.Clients;
 
 import CargoTransportation.Actions;
+import CargoTransportation.Const;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -31,7 +32,7 @@ public class DeleteClientController {
             if (!id_.equals("")) {
                 if (isNumeric(id_)==true) {
                     try{
-                    dbHandler.Del("cargotransportation.clients",id.getText());
+                    dbHandler.Del(Const.CLIENTS_TABLE,id.getText());
                     message.setText("Client removed!");
                     }catch(SQLException e){
                         message.setText("Something went wrong!");

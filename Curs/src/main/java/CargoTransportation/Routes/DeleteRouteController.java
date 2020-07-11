@@ -1,6 +1,7 @@
 package CargoTransportation.Routes;
 
 import CargoTransportation.Actions;
+import CargoTransportation.Const;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -31,7 +32,7 @@ public class DeleteRouteController {
             if (!id_.equals("")) {
                 if (isNumeric(id_)==true) {
                     try{
-                    dbHandler.Del("cargotransportation.routes",id.getText());
+                    dbHandler.Del(Const.ROUTES_TABLE,id.getText());
                     message.setText("Route removed!");
                     }catch(SQLException e){
                         message.setText("Something went wrong!");

@@ -1,6 +1,7 @@
 package CargoTransportation.Vehicles;
 
 import CargoTransportation.ConnectionToDB;
+import CargoTransportation.Const;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -63,7 +64,7 @@ public class VehiclesController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         final ObservableList data = FXCollections.observableArrayList();
-        String query = "SELECT * FROM cargotransportation.vehicles";
+        String query = "SELECT * FROM " + Const.VEHICLES_TABLE;
         Statement st = null;
         try {
             st = ConnectionToDB.getConnection().createStatement();
@@ -79,12 +80,12 @@ public class VehiclesController implements Initializable {
         Vehicles vehicles;
         try {
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String license_plate = rs.getString("license_plate");
-                String model = rs.getString("model");
-                Float fuel_consumption = rs.getFloat("fuel_consumption");
-                Float carrying = rs.getFloat("carrying");
-                Float wagon_volume = rs.getFloat("wagon_volume");
+                int id = rs.getInt(Const.VEHICLES_ID);
+                String license_plate = rs.getString(Const.VEHICLES_LICENSE_PLATE);
+                String model = rs.getString(Const.VEHICLES_MODEL);
+                Float fuel_consumption = rs.getFloat(Const.VEHICLES_FUEL_CONSUMPTION);
+                Float carrying = rs.getFloat(Const.VEHICLES_CARRYING);
+                Float wagon_volume = rs.getFloat(Const.VEHICLES_WAGON_VOLUME);
                 vehicles = new Vehicles(id, license_plate, model, fuel_consumption, carrying, wagon_volume);
                 data.add(vehicles);
             }

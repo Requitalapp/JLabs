@@ -1,6 +1,7 @@
 package CargoTransportation.Orders;
 
 import CargoTransportation.ConnectionToDB;
+import CargoTransportation.Const;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -70,7 +71,7 @@ public class OrdersController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         final ObservableList data = FXCollections.observableArrayList();
-        String query = "SELECT * FROM cargotransportation.orders";
+        String query = "SELECT * FROM " + Const.ORDERS_TABLE;
         Statement st = null;
         try {
             st = ConnectionToDB.getConnection().createStatement();
@@ -86,14 +87,14 @@ public class OrdersController implements Initializable {
         Orders orders;
         try {
             while (rs.next()) {
-                int id = rs.getInt("id");
-                int managerId = rs.getInt("manager_id");
-                int clientId = rs.getInt("client_id");
-                int routeId = rs.getInt("route_id");
-                int driverId = rs.getInt("driver_id");
-                int cargoId = rs.getInt("cargo_id");
-                String orderDate = rs.getString("order_date");
-                String deliveryDate = rs.getString("delivery_date");
+                int id = rs.getInt(Const.ORDERS_ID);
+                int managerId = rs.getInt(Const.ORDERS_MANAGER_ID);
+                int clientId = rs.getInt(Const.ORDERS_CLIENT_ID);
+                int routeId = rs.getInt(Const.ORDERS_ROUTE_ID);
+                int driverId = rs.getInt(Const.ORDERS_DRIVER_ID);
+                int cargoId = rs.getInt(Const.ORDERS_CARGO_ID);
+                String orderDate = rs.getString(Const.ORDERS_ORDER_DATE);
+                String deliveryDate = rs.getString(Const.ORDERS_DELIVERY_DATE);
                 orders = new Orders(id, managerId, clientId, routeId, driverId, cargoId, orderDate, deliveryDate);
                 data.add(orders);
             }
