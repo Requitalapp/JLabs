@@ -1,7 +1,7 @@
 package CargoTransportation.Orders;
 
-import CargoTransportation.Actions;
 import CargoTransportation.Const;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -25,42 +25,38 @@ public class DeleteOrderController {
     private TextArea message;
 
     @FXML
-    void initialize(){
-        Actions dbHandler = new Actions();
+    void initialize() {
         delete.setOnAction(even -> {
             String id_ = id.getText().trim();
             if (!id_.equals("")) {
-                if (isNumeric(id_)==true) {
+                if (isNumeric(id_) == true) {
                     try {
-                        dbHandler.Del(Const.ORDERS_TABLE, id.getText());
-                        message.setText("Order removed!");
-                    }catch(SQLException e){
+                        if (DBHandler.Del(Const.ORDERS_TABLE, id.getText())){
+                            message.setText("Order has been deleted");
+                        }else {
+                            message.setText("No orders with this id found");
+                        }
+                    } catch (SQLException e) {
                         message.setText("Something went wrong!");
                         System.out.println(e.getErrorCode());
                         e.printStackTrace();
                     }
-                }
-                else message.setText("Enter another ID!");
-            }
-            else
+                } else message.setText("Enter another ID!");
+            } else
                 message.setText("Fill the field!");
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
 
     }
 
-    public static boolean isNumeric(String str)
-    {
-        try
-        {
+    public static boolean isNumeric(String str) {
+        try {
             double d = Double.parseDouble(str);
-        }
-        catch(NumberFormatException nfe)
-        {
+        } catch (NumberFormatException nfe) {
             return false;
         }
         return true;

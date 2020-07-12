@@ -1,6 +1,6 @@
 package CargoTransportation.Cargo;
 
-import CargoTransportation.Actions;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -34,16 +34,15 @@ public class AddCargoController {
 
     @FXML
     void initialize() {
-        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String type_ = type.getText().trim();
             String cost_ = cost.getText().trim();
             String volume_ = volume.getText().trim();
             String weight_ = weight.getText().trim();
             if (!weight_.equals("") && !volume_.equals("") && !cost_.equals("") && !type_.equals("")) {
-                if (isNumeric(cost_) == true && isNumeric(volume_) == true && isNumeric(weight_) == true) {
+                if (isNumeric(cost_) && isNumeric(volume_) && isNumeric(weight_)) {
                     try {
-                        dbHandler.AddCargo(type.getText(), cost.getText(), volume.getText(), weight.getText());
+                        DBHandler.AddCargo(type.getText(), cost.getText(), volume.getText(), weight.getText());
                         message.setText("Cargo added!");
                     } catch (SQLException e) {
                         message.setText("Something went wrong!");
@@ -56,7 +55,7 @@ public class AddCargoController {
 
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
     }

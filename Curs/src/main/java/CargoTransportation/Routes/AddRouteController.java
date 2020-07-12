@@ -1,6 +1,6 @@
 package CargoTransportation.Routes;
 
-import CargoTransportation.Actions;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -32,7 +32,6 @@ public class AddRouteController {
 
     @FXML
     void initialize() {
-        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String start_point_ = start_point.getText().trim();
             String end_point_ = end_point.getText().trim();
@@ -40,7 +39,7 @@ public class AddRouteController {
             if (!start_point_.equals("") && !end_point_.equals("") && !distance_.equals("")) {
                 if (isNumeric(distance_) == true) {
                     try {
-                        dbHandler.AddRoute(start_point.getText(), end_point.getText(), distance.getText());
+                        DBHandler.AddRoute(start_point.getText(), end_point.getText(), distance.getText());
                         message.setText("Route added!");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -52,7 +51,7 @@ public class AddRouteController {
 
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
     }

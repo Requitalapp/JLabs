@@ -1,10 +1,13 @@
 package CargoTransportation;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class Actions {
+public class DBHandler {
 
-    public void AddCargo(String type, String cost, String volume, String weight) throws SQLException {
+    public static void AddCargo(String type, String cost, String volume, String weight) throws SQLException {
         String insert = "INSERT INTO " + Const.CARGO_TABLE + " (" + Const.CARGO_TYPE + ", " + Const.CARGO_COST + ", "
                 + Const.CARGO_VOLUME + ", " + Const.CARGO_WEIGHT + ") VALUES (?,?,?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
@@ -16,7 +19,7 @@ public class Actions {
 
     }
 
-    public void AddClients(String fullName, String phoneNumber, String address) throws SQLException {
+    public static void AddClients(String fullName, String phoneNumber, String address) throws SQLException {
         String insert = "INSERT INTO " + Const.CLIENTS_TABLE + " (" + Const.CLIENTS_FULL_NAME + ", " + Const.CLIENTS_PHONE_NUMBER + ", "
                 + Const.CLIENTS_ADDRESS + ") VALUES (?,?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
@@ -26,7 +29,7 @@ public class Actions {
         prSt.executeUpdate();
     }
 
-    public void AddManager(String fullName, String phoneNumber) throws SQLException {
+    public static void AddManager(String fullName, String phoneNumber) throws SQLException {
         String insert = "INSERT INTO " + Const.MANAGERS_TABLE + " (" + Const.MANAGERS_FULL_NAME + ", " + Const.MANAGERS_PHONE_NUMBER + ") VALUES (?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, fullName);
@@ -35,7 +38,7 @@ public class Actions {
 
     }
 
-    public void AddRoute(String startPoint, String endPoint, String distance) throws SQLException {
+    public static void AddRoute(String startPoint, String endPoint, String distance) throws SQLException {
         String insert = "INSERT INTO " + Const.ROUTES_TABLE + " (" + Const.ROUTES_START_POINT + ", " + Const.ROUTES_END_POINT + ", "
                 + Const.ROUTES_DISTANCE + ") VALUES (?,?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
@@ -46,7 +49,7 @@ public class Actions {
 
     }
 
-    public void AddVehicle(String licensePlate, String model, String fuelConsumption, String carrying, String wagonVolume) throws SQLException {
+    public static void AddVehicle(String licensePlate, String model, String fuelConsumption, String carrying, String wagonVolume) throws SQLException {
         String insert = "INSERT INTO " + Const.VEHICLES_TABLE + " (" + Const.VEHICLES_LICENSE_PLATE + ", " + Const.VEHICLES_MODEL + ", "
                 + Const.VEHICLES_FUEL_CONSUMPTION + ", " + Const.VEHICLES_CARRYING + ", " + Const.VEHICLES_WAGON_VOLUME + ") VALUES (?,?,?,?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
@@ -59,7 +62,7 @@ public class Actions {
 
     }
 
-    public void AddDriver(String fullName, String license, String phoneNumber, String vehicleId) throws SQLException {
+    public static void AddDriver(String fullName, String license, String phoneNumber, String vehicleId) throws SQLException {
         String insert = "INSERT INTO " + Const.DRIVERS_TABLE + " (" + Const.DRIVERS_FULL_NAME + ", " + Const.DRIVERS_LICENSE + ", "
                 + Const.DRIVERS_PHONE_NUMBER + ", " + Const.DRIVERS_VEHICLE_ID + ") VALUES (?,?,?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
@@ -71,10 +74,10 @@ public class Actions {
 
     }
 
-    public void AddOrder(String managerId, String clientId, String routeId, String driverId, String cargoId, String orderDate, String deliveryDate) throws SQLException {
-        String insert = "INSERT INTO " + Const.ORDERS_TABLE + " (" + Const.ORDERS_MANAGER_ID + ", " + Const.ORDERS_CLIENT_ID +", "
-                + Const.ORDERS_ROUTE_ID +", " + Const.ORDERS_DRIVER_ID +", "+ Const.ORDERS_CARGO_ID +", "+ Const.ORDERS_ORDER_DATE +", "
-                + Const.ORDERS_DELIVERY_DATE +") VALUES (?,?,?,?,?,?,?)";
+    public static void AddOrder(String managerId, String clientId, String routeId, String driverId, String cargoId, String orderDate, String deliveryDate) throws SQLException {
+        String insert = "INSERT INTO " + Const.ORDERS_TABLE + " (" + Const.ORDERS_MANAGER_ID + ", " + Const.ORDERS_CLIENT_ID + ", "
+                + Const.ORDERS_ROUTE_ID + ", " + Const.ORDERS_DRIVER_ID + ", " + Const.ORDERS_CARGO_ID + ", " + Const.ORDERS_ORDER_DATE + ", "
+                + Const.ORDERS_DELIVERY_DATE + ") VALUES (?,?,?,?,?,?,?)";
         PreparedStatement prSt = ConnectionToDB.getConnection().prepareStatement(insert);
         prSt.setString(1, managerId);
         prSt.setString(2, clientId);
@@ -88,10 +91,14 @@ public class Actions {
     }
 
 
-    public static void Del(String table, String id) throws SQLException {
-        PreparedStatement del = null;
-        del = ConnectionToDB.getConnection().prepareStatement("DELETE FROM " + table + " WHERE (id) = ?");
-        del.setString(1, id);
-        del.execute();
+    public static boolean Del(String table, String id) throws SQLException {
+        Statement st = st = ConnectionToDB.getConnection().createStatement();
+        if (st.executeUpdate("DELETE FROM " + table + " WHERE id = " + id) == 0){
+            return false;
+        }else {
+            return true;
+        }
     }
+
+
 }

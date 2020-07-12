@@ -7,14 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import static CargoTransportation.FXActions.changeScene;
 
 public class Req2Controller implements Initializable {
     ResultSet rs = null;
@@ -79,7 +79,7 @@ public class Req2Controller implements Initializable {
 
                 try {
                     rs = st.executeQuery(existanceCheckQuery);
-                    if (rs.next() == false){
+                    if (rs.next() == false) {
                         message.setText("Manager not found!");
                         return;
                     }
@@ -91,10 +91,10 @@ public class Req2Controller implements Initializable {
 
                 Req2Table req2;
                 try {
-                    if (rs.next() == false){
+                    if (rs.next() == false) {
                         message.setText("Manager has no served orders!");
                         return;
-                    }else{
+                    } else {
                         message.setText("Found!");
                     }
                     do {
@@ -107,7 +107,7 @@ public class Req2Controller implements Initializable {
                         String delivery_date = rs.getString("o.delivery_date");
                         req2 = new Req2Table(cargo, client, driver, start_point, end_point, order_date, delivery_date);
                         data.add(req2);
-                    }while (rs.next());
+                    } while (rs.next());
                     st.close();
                 } catch (Exception e) {
                     System.out.println("Error.");
@@ -126,8 +126,7 @@ public class Req2Controller implements Initializable {
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
-            stage.close();
+            changeScene("/CargoTransportation/Requests/Requests.fxml", event);
         });
     }
 }

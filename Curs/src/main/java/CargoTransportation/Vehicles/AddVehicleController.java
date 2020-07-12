@@ -1,6 +1,6 @@
 package CargoTransportation.Vehicles;
 
-import CargoTransportation.Actions;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -37,7 +37,6 @@ public class AddVehicleController {
 
     @FXML
     void initialize() {
-        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String license_plate_ = license_plate.getText().trim();
             String model_ = model.getText().trim();
@@ -47,7 +46,7 @@ public class AddVehicleController {
             if (!wagon_volume_.equals("") && !carrying_.equals("") && !fuel_consumption_.equals("") && !model_.equals("") && !license_plate_.equals("")) {
                 if (isNumeric(wagon_volume_) == true && isNumeric(carrying_) == true && isNumeric(fuel_consumption_) == true) {
                     try {
-                        dbHandler.AddVehicle(license_plate.getText(), model.getText(), fuel_consumption.getText(), carrying.getText(), wagon_volume.getText());
+                        DBHandler.AddVehicle(license_plate.getText(), model.getText(), fuel_consumption.getText(), carrying.getText(), wagon_volume.getText());
                         message.setText("Vehicle added!");
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -59,7 +58,7 @@ public class AddVehicleController {
 
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
     }

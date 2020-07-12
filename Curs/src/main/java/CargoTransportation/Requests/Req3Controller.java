@@ -8,14 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import static CargoTransportation.FXActions.changeScene;
 
 public class Req3Controller implements Initializable {
     ResultSet rs = null;
@@ -72,10 +72,10 @@ public class Req3Controller implements Initializable {
                 final ObservableList data = FXCollections.observableArrayList();
                 Routes routes;
                 try {
-                    if (rs.next() == false){
+                    if (rs.next() == false) {
                         message.setText("Start point not found!");
                         return;
-                    }else{
+                    } else {
                         message.setText("Found!");
                     }
                     do {
@@ -85,7 +85,7 @@ public class Req3Controller implements Initializable {
                         Float distance = rs.getFloat("distance");
                         routes = new Routes(id, start_point, end_point, distance);
                         data.add(routes);
-                    }while (rs.next());
+                    } while (rs.next());
                     st.close();
                 } catch (Exception e) {
                     System.out.println("Error.");
@@ -102,8 +102,7 @@ public class Req3Controller implements Initializable {
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
-            stage.close();
+            changeScene("/CargoTransportation/Requests/Requests.fxml", event);
         });
     }
 }

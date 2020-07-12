@@ -5,22 +5,20 @@ import CargoTransportation.Const;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import java.io.IOException;
+
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import static CargoTransportation.FXActions.changeScene;
+import static CargoTransportation.FXActions.show_display;
 
 
 public class OrdersController implements Initializable {
@@ -34,19 +32,25 @@ public class OrdersController implements Initializable {
     private TableColumn<Orders, Integer> id;
 
     @FXML
-    private TableColumn<Orders, Integer> manager_id;
+    private TableColumn<Orders, String> manager_name;
 
     @FXML
-    private TableColumn<Orders, Integer> client_id;
+    private TableColumn<Orders, String> client_name;
 
     @FXML
-    private TableColumn<Orders, Integer> route_id;
+    private TableColumn<Orders, String> start_point;
 
     @FXML
-    private TableColumn<Orders, Integer> driver_id;
+    private TableColumn<Orders, String> end_point;
 
     @FXML
-    private TableColumn<Orders, Integer> cargo_id;
+    private TableColumn<Orders, String> driver_name;
+
+    @FXML
+    private TableColumn<Orders, String> cargo_type;
+
+    @FXML
+    private TableColumn<Orders, String> license_plate;
 
     @FXML
     private TableColumn<Orders, String> order_date;
@@ -71,7 +75,11 @@ public class OrdersController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         final ObservableList data = FXCollections.observableArrayList();
-        String query = "SELECT * FROM " + Const.ORDERS_TABLE;
+//        String query = "SELECT * FROM " + Const.ORDERS_TABLE;
+        String query = "SELECT o.id, m.full_name, cl.full_name, r.start_point, r.end_point, d.full_name, v.license_plate, c.type, o.order_date, o.delivery_date " +
+                "FROM " + Const.ORDERS_TABLE + " as o ," + Const.CARGO_TABLE + " as c ," + Const.MANAGERS_TABLE + " as m ,"
+                + Const.CLIENTS_TABLE + " as cl ," + Const.DRIVERS_TABLE + " as d ," + Const.ROUTES_TABLE + " as r," + Const.VEHICLES_TABLE + " as v " +
+                "WHERE o.manager_id = m.id and o.client_id = cl.id and o.route_id = r.id and o.driver_id = d.id and o.cargo_id = c.id and d.vehicle_id = v.id ";
         Statement st = null;
         try {
             st = ConnectionToDB.getConnection().createStatement();
@@ -88,14 +96,17 @@ public class OrdersController implements Initializable {
         try {
             while (rs.next()) {
                 int id = rs.getInt(Const.ORDERS_ID);
-                int managerId = rs.getInt(Const.ORDERS_MANAGER_ID);
-                int clientId = rs.getInt(Const.ORDERS_CLIENT_ID);
-                int routeId = rs.getInt(Const.ORDERS_ROUTE_ID);
-                int driverId = rs.getInt(Const.ORDERS_DRIVER_ID);
-                int cargoId = rs.getInt(Const.ORDERS_CARGO_ID);
-                String orderDate = rs.getString(Const.ORDERS_ORDER_DATE);
-                String deliveryDate = rs.getString(Const.ORDERS_DELIVERY_DATE);
-                orders = new Orders(id, managerId, clientId, routeId, driverId, cargoId, orderDate, deliveryDate);
+                String manager_name = rs.getString("m.full_name");
+                String client_name = rs.getString("cl.full_name");
+                String route_start = rs.getString("r.start_point");
+                String route_end = rs.getString("r.end_point");
+                String driver_name = rs.getString("d.full_name");
+                String vehicle_license_plate = rs.getString("v.license_plate");
+                String cargo_type = rs.getString("c.type");
+                String orderDate = rs.getString("o.order_date");
+                String deliveryDate = rs.getString("o.delivery_date");
+                orders = new Orders(id, manager_name, client_name, route_start, route_end, driver_name, vehicle_license_plate, cargo_type,
+                        orderDate, deliveryDate);
                 data.add(orders);
             }
             st.close();
@@ -104,47 +115,34 @@ public class OrdersController implements Initializable {
             System.out.println(e.getMessage());
         }
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        manager_id.setCellValueFactory(new PropertyValueFactory<>("manager_id"));
-        client_id.setCellValueFactory(new PropertyValueFactory<>("client_id"));
-        route_id.setCellValueFactory(new PropertyValueFactory<>("route_id"));
-        driver_id.setCellValueFactory(new PropertyValueFactory<>("driver_id"));
-        cargo_id.setCellValueFactory(new PropertyValueFactory<>("cargo_id"));
+        manager_name.setCellValueFactory(new PropertyValueFactory<>("manager_name"));
+        client_name.setCellValueFactory(new PropertyValueFactory<>("client_name"));
+        start_point.setCellValueFactory(new PropertyValueFactory<>("route_start"));
+        end_point.setCellValueFactory(new PropertyValueFactory<>("route_end"));
+        driver_name.setCellValueFactory(new PropertyValueFactory<>("driver_name"));
+        license_plate.setCellValueFactory(new PropertyValueFactory<>("vehicle_license_plate"));
+        cargo_type.setCellValueFactory(new PropertyValueFactory<>("cargo_type"));
         order_date.setCellValueFactory(new PropertyValueFactory<>("order_date"));
         delivery_date.setCellValueFactory(new PropertyValueFactory<>("delivery_date"));
         table.setItems(data);
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
-            stage.close();
+            changeScene("/CargoTransportation/MainPage.fxml", event);
+
         });
 
         update.setOnAction(event -> {
-            show_display("/CargoTransportation/Orders/Orders.fxml");
-            update.getScene().getWindow().hide();
+            changeScene("/CargoTransportation/Orders/Orders.fxml", event);
         });
 
         add.setOnAction(event -> {
             show_display("/CargoTransportation/Orders/AddOrder.fxml");
+            changeScene("/CargoTransportation/Orders/Orders.fxml", event);
         });
 
         delete.setOnAction(event -> {
             show_display("/CargoTransportation/Orders/DeleteOrder.fxml");
+            changeScene("/CargoTransportation/Orders/Orders.fxml", event);
         });
-
-    }
-
-    void show_display(String name) {
-        FXMLLoader delFx = new FXMLLoader();
-        delFx.setLocation(getClass().getResource(name));
-
-        try {
-            delFx.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Parent root_ = delFx.getRoot();
-        Stage show = new Stage();
-        show.setScene(new Scene(root_));
-        show.showAndWait();
     }
 }

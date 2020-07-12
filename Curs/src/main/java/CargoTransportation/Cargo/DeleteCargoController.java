@@ -1,7 +1,7 @@
 package CargoTransportation.Cargo;
 
-import CargoTransportation.Actions;
 import CargoTransportation.Const;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -26,15 +26,17 @@ public class DeleteCargoController {
 
     @FXML
     void initialize() {
-        Actions dbHandler = new Actions();
         delete.setOnAction(even -> {
             String id_ = id.getText().trim();
             if (!id_.equals("")) {
                 if (isNumeric(id_) == true) {
                     try {
-                        dbHandler.Del(Const.CARGO_TABLE, id.getText());
-                        message.setText("Cargo has been deleted");
-                    }catch(SQLException e){
+                        if (DBHandler.Del(Const.CARGO_TABLE, id.getText())){
+                            message.setText("Cargo has been deleted");
+                        }else {
+                            message.setText("No cargo with this id found");
+                        }
+                    } catch (SQLException e) {
                         System.out.println(e.getErrorCode());
                         System.out.println("Something went wrong!");
                         e.printStackTrace();
@@ -45,7 +47,7 @@ public class DeleteCargoController {
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
 

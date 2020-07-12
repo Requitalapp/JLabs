@@ -1,6 +1,6 @@
 package CargoTransportation.Clients;
 
-import CargoTransportation.Actions;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -31,14 +31,13 @@ public class AddClientsController {
 
     @FXML
     void initialize() {
-        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String full_name_ = full_name.getText().trim();
             String phone_number_ = phone_number.getText().trim();
             String address_ = address.getText().trim();
             if (!address_.equals("") && !phone_number_.equals("") && !full_name_.equals("")) {
                 try {
-                    dbHandler.AddClients(full_name.getText(), phone_number.getText(), address.getText());
+                    DBHandler.AddClients(full_name.getText(), phone_number.getText(), address.getText());
                     message.setText("Client added!");
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -49,7 +48,7 @@ public class AddClientsController {
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
     }

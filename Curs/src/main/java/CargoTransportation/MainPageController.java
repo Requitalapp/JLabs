@@ -1,12 +1,12 @@
 package CargoTransportation;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.io.IOException;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import static CargoTransportation.FXActions.changeScene;
+
+;
 
 
 public class MainPageController {
@@ -39,57 +39,45 @@ public class MainPageController {
     private Button exit;
 
     @FXML
-    void initialize(){
+    void initialize() {
+
         clients.setOnAction(event -> {
-            show_display("/CargoTransportation/Clients/Clients.fxml");
+            changeScene("/CargoTransportation/Clients/Clients.fxml", event);
         });
 
         managers.setOnAction(event -> {
-            show_display("/CargoTransportation/Managers/Managers.fxml");
+            changeScene("/CargoTransportation/Managers/Managers.fxml", event);
         });
 
         orders.setOnAction(event -> {
-            show_display("/CargoTransportation/Orders/Orders.fxml");
+            changeScene("/CargoTransportation/Orders/Orders.fxml", event);
         });
 
         drivers.setOnAction(event -> {
-            show_display("/CargoTransportation/Drivers/Drivers.fxml");
+            changeScene("/CargoTransportation/Drivers/Drivers.fxml", event);
         });
 
         vehicles.setOnAction(event -> {
-            show_display("/CargoTransportation/Vehicles/Vehicles.fxml");
+            changeScene("/CargoTransportation/Vehicles/Vehicles.fxml", event);
         });
 
         routes.setOnAction(event -> {
-            show_display("/CargoTransportation/Routes/Routes.fxml");
+            changeScene("/CargoTransportation/Routes/Routes.fxml", event);
         });
 
         cargo.setOnAction(event -> {
-            show_display("/CargoTransportation/Cargo/Cargo.fxml");
+            changeScene("/CargoTransportation/Cargo/Cargo.fxml", event);
         });
 
         requests.setOnAction(event -> {
-            show_display("/CargoTransportation/Requests/Requests.fxml");
+            changeScene("/CargoTransportation/Requests/Requests.fxml", event);
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
     }
 
-    void show_display(String name){
-        FXMLLoader delFx = new FXMLLoader();
-        delFx.setLocation(getClass().getResource(name));
 
-        try {
-            delFx.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Parent root_ = delFx.getRoot();
-        Stage show = new Stage();
-        show.setScene(new Scene(root_));
-        show.showAndWait();
-    }
 }

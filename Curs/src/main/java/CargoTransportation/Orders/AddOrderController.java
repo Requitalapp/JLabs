@@ -1,6 +1,6 @@
 package CargoTransportation.Orders;
 
-import CargoTransportation.Actions;
+import CargoTransportation.DBHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -43,7 +43,6 @@ public class AddOrderController {
 
     @FXML
     void initialize() {
-        Actions dbHandler = new Actions();
         add.setOnAction(even -> {
             String manager_id_ = manager_id.getText().trim();
             String client_id_ = client_id.getText().trim();
@@ -58,7 +57,7 @@ public class AddOrderController {
                 if (isNumeric(manager_id_) == true && isNumeric(client_id_) == true && isNumeric(route_id_) == true
                         && isNumeric(driver_id_) == true && isNumeric(cargo_id_) == true) {
                     try {
-                        dbHandler.AddOrder(manager_id.getText(), client_id.getText(), route_id.getText(),
+                        DBHandler.AddOrder(manager_id.getText(), client_id.getText(), route_id.getText(),
                                 driver_id.getText(), cargo_id.getText(), order_date.getText(), delivery_date.getText());
                         message.setText("Order added!");
                     } catch (SQLException e) {
@@ -76,7 +75,7 @@ public class AddOrderController {
 
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         });
     }

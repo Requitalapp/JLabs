@@ -7,14 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import static CargoTransportation.FXActions.changeScene;
 
 public class Req1Controller implements Initializable {
     ResultSet rs = null;
@@ -78,7 +78,7 @@ public class Req1Controller implements Initializable {
 
                 try {
                     rs = st.executeQuery(existanceCheckQuery);
-                    if (rs.next() == false){
+                    if (rs.next() == false) {
                         message.setText("Client not found!");
                         return;
                     }
@@ -90,13 +90,13 @@ public class Req1Controller implements Initializable {
                 final ObservableList data = FXCollections.observableArrayList();
                 Req1Table req1;
                 try {
-                    if (rs.next() == false){
+                    if (rs.next() == false) {
                         message.setText("Client has no orders!");
                         return;
-                    }else{
+                    } else {
                         message.setText("Found!");
                     }
-                    do  {
+                    do {
                         String cargo = rs.getString("c.type");
                         String manager = rs.getString("m.full_name");
                         String driver = rs.getString("d.full_name");
@@ -106,7 +106,7 @@ public class Req1Controller implements Initializable {
                         String delivery_date = rs.getString("o.delivery_date");
                         req1 = new Req1Table(cargo, manager, driver, start_point, end_point, order_date, delivery_date);
                         data.add(req1);
-                    }while (rs.next());
+                    } while (rs.next());
                     st.close();
                 } catch (Exception e) {
                     System.out.println("Error.");
@@ -125,8 +125,7 @@ public class Req1Controller implements Initializable {
         });
 
         exit.setOnAction(event -> {
-            Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
-            stage.close();
+            changeScene("/CargoTransportation/Requests/Requests.fxml", event);
         });
     }
 }

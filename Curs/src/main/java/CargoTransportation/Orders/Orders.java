@@ -2,21 +2,26 @@ package CargoTransportation.Orders;
 
 public class Orders {
     private int id;
-    private int manager_id;
-    private int client_id;
-    private int route_id;
-    private int driver_id;
-    private int cargo_id;
+    private String manager_name;
+    private String client_name;
+    private String route_start;
+    private String route_end;
+    private String driver_name;
+    private String vehicle_license_plate;
+    private String cargo_type;
     private String order_date;
     private String delivery_date;
 
-    public Orders(int id, int manager_id, int client_id, int route_id, int driver_id, int cargo_id, String order_date, String delivery_date) {
+    public Orders(int id, String manager_name, String client_name, String route_start, String route_end, String driver_name,
+                  String vehicle_license_plate, String cargo_type, String order_date, String delivery_date) {
         this.id = id;
-        this.manager_id = manager_id;
-        this.client_id = client_id;
-        this.route_id = route_id;
-        this.driver_id = driver_id;
-        this.cargo_id = cargo_id;
+        this.manager_name = manager_name;
+        this.client_name = client_name;
+        this.route_start = route_start;
+        this.route_end = route_end;
+        this.driver_name = driver_name;
+        this.vehicle_license_plate = vehicle_license_plate;
+        this.cargo_type = cargo_type;
         this.order_date = order_date;
         this.delivery_date = delivery_date;
     }
@@ -25,24 +30,32 @@ public class Orders {
         return id;
     }
 
-    public int getManager_id() {
-        return manager_id;
+    public String getManager_name() {
+        return manager_name;
     }
 
-    public int getClient_id() {
-        return client_id;
+    public String getClient_name() {
+        return client_name;
     }
 
-    public int getRoute_id() {
-        return route_id;
+    public String getRoute_start() {
+        return route_start;
     }
 
-    public int getDriver_id() {
-        return driver_id;
+    public String getRoute_end() {
+        return route_end;
     }
 
-    public int getCargo_id() {
-        return cargo_id;
+    public String getDriver_name() {
+        return driver_name;
+    }
+
+    public String getVehicle_license_plate() {
+        return vehicle_license_plate;
+    }
+
+    public String getCargo_type() {
+        return cargo_type;
     }
 
     public String getOrder_date() {
@@ -57,24 +70,32 @@ public class Orders {
         this.id = id;
     }
 
-    public void setManager_id(int manager_id) {
-        this.manager_id = manager_id;
+    public void setManager_name(String manager_name) {
+        this.manager_name = manager_name;
     }
 
-    public void setClient_id(int client_id) {
-        this.client_id = client_id;
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 
-    public void setRoute_id(int route_id) {
-        this.route_id = route_id;
+    public void setRoute_start(String route_start) {
+        this.route_start = route_start;
     }
 
-    public void setDriver_id(int driver_id) {
-        this.driver_id = driver_id;
+    public void setRoute_end(String route_end) {
+        this.route_end = route_end;
     }
 
-    public void setCargo_id(int cargo_id) {
-        this.cargo_id = cargo_id;
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
+    }
+
+    public void setVehicle_license_plate(String vehicle_license_plate) {
+        this.vehicle_license_plate = vehicle_license_plate;
+    }
+
+    public void setCargo_type(String cargo_type) {
+        this.cargo_type = cargo_type;
     }
 
     public void setOrder_date(String order_date) {

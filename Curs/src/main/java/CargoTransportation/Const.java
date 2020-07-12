@@ -3,7 +3,7 @@ package CargoTransportation;
 public class Const {
     //Cargo table
     public static final String CARGO_TABLE = "cargo";
-    public static final String CARGO_ID= "id";
+    public static final String CARGO_ID = "id";
     public static final String CARGO_TYPE = "type";
     public static final String CARGO_COST = "cost";
     public static final String CARGO_VOLUME = "volume";
@@ -56,8 +56,6 @@ public class Const {
     public static final String VEHICLES_FUEL_CONSUMPTION = "fuel_consumption";
     public static final String VEHICLES_CARRYING = "carrying";
     public static final String VEHICLES_WAGON_VOLUME = "wagon_volume";
-
-
 
 
 }

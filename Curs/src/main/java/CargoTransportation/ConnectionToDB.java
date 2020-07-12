@@ -20,11 +20,11 @@ public class ConnectionToDB {
         }
     }
 
-    public static void closeConnection(){
+    public static void closeConnection() {
         try {
             connection.close();
             System.out.println("Connection closed!");
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
